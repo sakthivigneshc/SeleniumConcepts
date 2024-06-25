@@ -1,4 +1,4 @@
-package lk;
+package Selenium_handsOn;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
