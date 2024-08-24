@@ -1,4 +1,4 @@
-package Selenium_handsOn;
+package selenium_Concepts_I;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
