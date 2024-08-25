@@ -21,8 +21,8 @@ public class ImplicitWaitConcept {
 		WebElement LoginBtn = driver.findElement(By.xpath("//input[@name='login-button']"));
 		LoginBtn.click();
 		
-		String UrlOfThePage  =	driver.getTitle();
-		
+		String UrlOfThePage  =	driver.getCurrentUrl();
+		System.out.println(UrlOfThePage);
 		if("https://www.saucedemo.com/inventory.html".equals(UrlOfThePage)) {
 			System.out.println("The URL is present as expected.");
 		}
@@ -35,12 +35,14 @@ public class ImplicitWaitConcept {
 		String HeadingText  = Heading.getText();
 		
 		if("Products".equals(HeadingText)) {
-			System.out.println("The heading is present as expected.");
+			System.out.println("The heading text is present as expected.");
 		}
 		
 		else {
-			System.out.println("The heading isn't present as expected.");
+			System.out.println("The heading text isn't present as expected.");
 
-		}	
+		}
+		
+		driver.quit();
 	}	
 }
