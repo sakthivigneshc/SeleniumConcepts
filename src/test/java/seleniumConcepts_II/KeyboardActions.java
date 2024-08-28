@@ -36,5 +36,33 @@ public static void main(String[] args) {
 	}
 	
 	driver.quit();
+	
+	/*
+	 
+	 Keys.CONTROL+'a'
+	 Keys.CONTROL+'c'
+	 Keys.CONTROL+'v'
+
+------------------------------------
+
+if you need to perform more complex keyboard interactions, such as pressing multiple keys at once, releasing keys, or combining mouse and keyboard actions, the Actions class can be useful. Here's an example of how you might use the Actions class to perform the same Tab and Enter actions:
+
+
+WebElement inputField = driver.findElement(By.id("yourElementId"));
+
+        // Create an Actions instance
+        Actions actions = new Actions(driver);
+
+        // Perform Tab and Enter key actions using the Actions class
+        actions.sendKeys(inputField, Keys.TAB)
+               .sendKeys(Keys.ENTER)
+               .perform();
+
+
+	 
+	
+	 */
+	
+	
 }
 }
