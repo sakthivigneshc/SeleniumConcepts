@@ -1,0 +1,57 @@
+package package1;
+
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.net.ssl.HttpsURLConnection;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class BrokenLinks {
+
+    public static void main(String[] args) throws Exception {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        
+        List<WebElement> elements = driver.findElements(By.tagName("a"));
+        Set<String> brokenlinkUrls = new HashSet<String>();
+
+        System.out.println("Total links found: " + elements.size());
+        Thread.sleep(2000);
+
+        for (WebElement link : elements) {
+            String linkurl = link.getAttribute("href");
+
+            // ✅ skip null or empty hrefs
+            if (linkurl == null || linkurl.isEmpty()) {
+                continue;
+            }
+
+            try {
+                URL url = new URL(linkurl);
+                URLConnection urlconnection = url.openConnection();
+                HttpsURLConnection httpsurlConnection = (HttpsURLConnection) urlconnection;
+                httpsurlConnection.connect();
+
+                int code = httpsurlConnection.getResponseCode();
+
+                if (code >= 400) {
+                    brokenlinkUrls.add(linkurl);
+                    System.out.println("Broken: " + linkurl + " | Code: " + code);
+                }
+            } catch (Exception e) {
+                System.out.println("Exception for URL: " + linkurl + " -> " + e.getMessage());
+            }
+        }
+
+     
+
+        driver.quit();
+    }
+}
